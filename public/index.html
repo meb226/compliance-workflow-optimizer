@@ -13,12 +13,12 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
-            background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+            background: linear-gradient(135deg, #4a5568 0%, #2d3748 100%);
             min-height: 100vh;
         }
 
         .header {
-            background: rgba(0, 0, 0, 0.2);
+            background: rgba(0, 0, 0, 0.3);
             padding: 20px 40px;
             display: flex;
             justify-content: space-between;
@@ -35,18 +35,22 @@
 
         .header-left p {
             font-size: 0.95em;
-            opacity: 0.9;
+            opacity: 0.95;
         }
 
         .header-right {
             text-align: right;
             font-size: 0.9em;
+            opacity: 0.95;
+        }
+
+        .header-right div {
+            margin-bottom: 4px;
         }
 
         .header-right a {
             color: white;
             text-decoration: none;
-            opacity: 0.9;
             transition: opacity 0.2s;
         }
 
@@ -61,7 +65,7 @@
             background: white;
             border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
         }
 
         .main-layout {
@@ -90,18 +94,23 @@
             color: #1f2937;
             margin-bottom: 25px;
             padding-bottom: 12px;
-            border-bottom: 3px solid #1e3a8a;
+            border-bottom: 3px solid #4a5568;
         }
 
         label {
             display: block;
             font-weight: 600;
             margin-bottom: 8px;
+            margin-top: 20px;
             color: #374151;
             font-size: 0.9em;
         }
 
-        select, textarea {
+        label:first-of-type {
+            margin-top: 0;
+        }
+
+        select, textarea, input[type="text"] {
             width: 100%;
             padding: 12px;
             border: 2px solid #e0e0e0;
@@ -109,24 +118,24 @@
             font-size: 0.95em;
             font-family: inherit;
             transition: border-color 0.3s;
-            margin-bottom: 20px;
+            margin-bottom: 0;
         }
 
-        select:focus, textarea:focus {
+        select:focus, textarea:focus, input[type="text"]:focus {
             outline: none;
-            border-color: #1e3a8a;
+            border-color: #4a5568;
         }
 
         textarea {
             resize: vertical;
-            min-height: 200px;
+            min-height: 180px;
         }
 
         .time-input-group {
             display: flex;
             align-items: center;
             gap: 10px;
-            margin-bottom: 20px;
+            margin-bottom: 0;
         }
 
         .time-input-group input {
@@ -135,22 +144,30 @@
             border: 2px solid #e0e0e0;
             border-radius: 8px;
             font-size: 0.95em;
+            flex-shrink: 0;
         }
 
         .time-input-group select {
-            width: 130px;
+            flex: 1;
             margin-bottom: 0;
+            min-width: 100px;
+        }
+
+        .time-input-group span {
+            color: #6b7280;
+            font-weight: 600;
+            flex-shrink: 0;
         }
 
         .time-input-group input:focus {
             outline: none;
-            border-color: #1e3a8a;
+            border-color: #4a5568;
         }
 
         button {
             width: 100%;
             padding: 16px;
-            background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+            background: linear-gradient(135deg, #4a5568 0%, #2d3748 100%);
             color: white;
             border: none;
             border-radius: 8px;
@@ -158,11 +175,12 @@
             font-weight: 600;
             cursor: pointer;
             transition: transform 0.2s, box-shadow 0.2s;
+            margin-top: 25px;
         }
 
         button:hover:not(:disabled) {
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(30, 58, 138, 0.4);
+            box-shadow: 0 5px 15px rgba(74, 85, 104, 0.4);
         }
 
         button:disabled {
@@ -182,7 +200,7 @@
 
         .spinner {
             border: 4px solid #f3f3f3;
-            border-top: 4px solid #1e3a8a;
+            border-top: 4px solid #4a5568;
             border-radius: 50%;
             width: 50px;
             height: 50px;
@@ -239,7 +257,7 @@
         }
 
         .workflow-card h3 {
-            color: #1e3a8a;
+            color: #1f2937;
             margin-bottom: 12px;
             font-size: 1.1em;
         }
@@ -290,7 +308,7 @@
         }
 
         .opportunities-section h3 {
-            color: #1e3a8a;
+            color: #1f2937;
             margin-bottom: 20px;
             font-size: 1.2em;
         }
@@ -324,7 +342,7 @@
             justify-content: center;
             width: 35px;
             height: 35px;
-            background: #1e3a8a;
+            background: #4a5568;
             color: white;
             border-radius: 50%;
             font-weight: bold;
@@ -360,7 +378,7 @@
         }
 
         .carousel-dot.active {
-            background: #1e3a8a;
+            background: #4a5568;
             width: 25px;
             border-radius: 5px;
         }
@@ -372,7 +390,7 @@
         }
 
         .carousel-arrow {
-            background: #1e3a8a;
+            background: #4a5568;
             color: white;
             border: none;
             padding: 10px 20px;
@@ -380,10 +398,12 @@
             cursor: pointer;
             font-size: 0.9em;
             transition: background 0.2s;
+            width: auto;
+            margin-top: 0;
         }
 
         .carousel-arrow:hover {
-            background: #1e40af;
+            background: #2d3748;
         }
 
         .analysis-section {
@@ -391,11 +411,11 @@
             padding: 25px;
             background: #f9fafb;
             border-radius: 10px;
-            border-left: 4px solid #1e3a8a;
+            border-left: 4px solid #4a5568;
         }
 
         .analysis-section h3 {
-            color: #1e3a8a;
+            color: #1f2937;
             margin-bottom: 15px;
             font-size: 1.1em;
         }
@@ -482,11 +502,12 @@
     <div class="header">
         <div class="header-left">
             <h1>Compliance Workflow Optimizer</h1>
-            <p>AI-Powered RegTech Analysis</p>
+            <p>Identify Automation Opportunities in Your Compliance Processes</p>
         </div>
         <div class="header-right">
             <div>Built by <strong>Mike Burns</strong></div>
-            <div><a href="https://linkedin.com/in/yourprofile" target="_blank">LinkedIn</a></div>
+            <div>AVP, Compliance | U.S. Bank</div>
+            <div><a href="https://linkedin.com/in/yourprofile" target="_blank">LinkedIn</a> | <a href="https://github.com/meb226" target="_blank">GitHub</a></div>
         </div>
     </div>
 
@@ -507,17 +528,26 @@
                         <option value="gifts">Gift & Entertainment Reporting</option>
                     </select>
                     
-                    <label>Describe Your Workflow:</label>
-                    <textarea id="workflow" placeholder="Describe your compliance workflow in detail..."></textarea>
+                    <label>Name Your Workflow:</label>
+                    <input type="text" id="workflowName" placeholder="e.g., Quarterly Lobbying Disclosure">
                     
-                    <label>Hours Required:</label>
+                    <label>Describe Your Workflow:</label>
+                    <textarea id="workflow" placeholder="Describe your compliance workflow in detail, including process steps, pain points, and manual tasks..."></textarea>
+                    
+                    <label>Time Required:</label>
                     <div class="time-input-group">
-                        <input type="number" id="hours" placeholder="0" min="0" step="0.5">
+                        <input type="number" id="timeAmount" placeholder="40" min="0" step="0.5">
+                        <select id="timeUnit">
+                            <option value="minutes">minutes</option>
+                            <option value="hours" selected>hours</option>
+                        </select>
                         <span>per</span>
-                        <select id="period">
+                        <select id="timePeriod">
+                            <option value="request">request</option>
+                            <option value="day">day</option>
                             <option value="week">week</option>
                             <option value="month">month</option>
-                            <option value="quarter">quarter</option>
+                            <option value="quarter" selected>quarter</option>
                             <option value="year">year</option>
                         </select>
                     </div>
@@ -538,11 +568,10 @@
                 </div>
                 
                 <div class="empty-state" id="emptyState">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
-                    </svg>
-                    <h3>No Analysis Yet</h3>
-                    <p>Select a template and describe your workflow to get started</p>
+                    <div style="font-size: 4em; margin-bottom: 20px;">📊</div>
+                    <h3>Ready to Optimize Your Workflow</h3>
+                    <p>Select a compliance workflow template from the left panel, or describe your own process to discover automation opportunities and time-saving recommendations.</p>
+                    <p style="margin-top: 15px; font-size: 0.9em;">AI-powered analysis identifies bottlenecks, suggests efficiency improvements, and estimates potential time savings.</p>
                 </div>
                 
                 <div class="results" id="results"></div>
@@ -552,26 +581,63 @@
 
     <script>
         const templates = {
-            lobbying: "Our team processes quarterly lobbying disclosure reports (LD-2) for 50+ clients. The workflow involves:\n- Collecting activity data from multiple departments via email\n- Manually categorizing expenses across 12+ disclosure categories\n- Cross-referencing against federal and state requirements\n- Preparing forms in various formats (LD-2, state-specific forms)\n- Internal review and approval process\n- Filing with government agencies\n- Tracking deadlines in shared calendars\nCurrently takes 40-60 hours per quarter per analyst.",
-            insider: "We manage insider trading pre-clearance requests for 300+ executives. Current process:\n- Employee submits trade request via email\n- Compliance officer manually checks against blackout periods\n- Review trading windows and material non-public information\n- Cross-reference with existing positions and prior trades\n- Email approval/denial back to employee\n- Log all requests in Excel spreadsheet\n- Quarterly reconciliation with actual trades\nTakes 15-30 minutes per request, with 50-100 requests weekly.",
-            political: "We track and approve political contributions for our organization:\n- Employees submit contribution requests via form\n- Compliance reviews against company PAC policies\n- Check contribution limits for federal/state/local candidates\n- Verify recipient eligibility\n- Approve/deny and notify requestor\n- Track all contributions in database\n- Quarterly reporting to leadership\n- Annual reconciliation for lobbying disclosure\nCurrently managing 200-300 contributions annually.",
-            form4: "We prepare Form 4 filings for insider transactions:\n- Monitor trading notifications from brokerage\n- Validate transaction details with insider\n- Calculate reportable quantities and values\n- Prepare Form 4 XML file\n- Review for accuracy\n- Submit via EDGAR system\n- Maintain filing records\nProcessing 50-75 filings monthly, 2-3 hours each.",
-            gifts: "We manage gift and entertainment compliance:\n- Employees submit gift/entertainment reports\n- Review against policy limits and restrictions\n- Check for conflicts of interest\n- Approve or escalate for senior review\n- Log in tracking system\n- Quarterly reporting to leadership\n- Annual audit preparation\nProcessing 300-400 reports annually, 30 minutes each."
+            lobbying: {
+                name: "Quarterly Lobbying Disclosure (LD-2)",
+                description: "Our team processes quarterly lobbying disclosure reports (LD-2) for 50+ clients. The workflow involves:\n- Collecting activity data from multiple departments via email\n- Manually categorizing expenses across 12+ disclosure categories\n- Cross-referencing against federal and state requirements\n- Preparing forms in various formats (LD-2, state-specific forms)\n- Internal review and approval process\n- Filing with government agencies\n- Tracking deadlines in shared calendars\nCurrently takes 40-60 hours per quarter per analyst.",
+                timeAmount: 50,
+                timeUnit: "hours",
+                timePeriod: "quarter"
+            },
+            insider: {
+                name: "Insider Trading Pre-Clearance",
+                description: "We manage insider trading pre-clearance requests for 300+ executives. Current process:\n- Employee submits trade request via email\n- Compliance officer manually checks against blackout periods\n- Review trading windows and material non-public information\n- Cross-reference with existing positions and prior trades\n- Email approval/denial back to employee\n- Log all requests in Excel spreadsheet\n- Quarterly reconciliation with actual trades\nTakes 15-30 minutes per request, with 50-100 requests weekly.",
+                timeAmount: 20,
+                timeUnit: "minutes",
+                timePeriod: "request"
+            },
+            political: {
+                name: "Political Contribution Tracking",
+                description: "We track and approve political contributions for our organization:\n- Employees submit contribution requests via form\n- Compliance reviews against company PAC policies\n- Check contribution limits for federal/state/local candidates\n- Verify recipient eligibility\n- Approve/deny and notify requestor\n- Track all contributions in database\n- Quarterly reporting to leadership\n- Annual reconciliation for lobbying disclosure\nCurrently managing 200-300 contributions annually.",
+                timeAmount: 30,
+                timeUnit: "minutes",
+                timePeriod: "request"
+            },
+            form4: {
+                name: "Form 4 Filing",
+                description: "We prepare Form 4 filings for insider transactions:\n- Monitor trading notifications from brokerage\n- Validate transaction details with insider\n- Calculate reportable quantities and values\n- Prepare Form 4 XML file\n- Review for accuracy\n- Submit via EDGAR system\n- Maintain filing records\nProcessing 50-75 filings monthly, 2-3 hours each.",
+                timeAmount: 2.5,
+                timeUnit: "hours",
+                timePeriod: "request"
+            },
+            gifts: {
+                name: "Gift & Entertainment Reporting",
+                description: "We manage gift and entertainment compliance:\n- Employees submit gift/entertainment reports\n- Review against policy limits and restrictions\n- Check for conflicts of interest\n- Approve or escalate for senior review\n- Log in tracking system\n- Quarterly reporting to leadership\n- Annual audit preparation\nProcessing 300-400 reports annually, 30 minutes each.",
+                timeAmount: 30,
+                timeUnit: "minutes",
+                timePeriod: "request"
+            }
         };
 
         document.getElementById('templateSelect').addEventListener('change', function() {
             const template = this.value;
             if (template && templates[template]) {
-                document.getElementById('workflow').value = templates[template];
+                const t = templates[template];
+                document.getElementById('workflowName').value = t.name;
+                document.getElementById('workflow').value = t.description;
+                document.getElementById('timeAmount').value = t.timeAmount;
+                document.getElementById('timeUnit').value = t.timeUnit;
+                document.getElementById('timePeriod').value = t.timePeriod;
             }
         });
 
         document.getElementById('workflowForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
+            const workflowName = document.getElementById('workflowName').value;
             const workflow = document.getElementById('workflow').value;
-            const hours = document.getElementById('hours').value;
-            const period = document.getElementById('period').value;
+            const timeAmount = document.getElementById('timeAmount').value;
+            const timeUnit = document.getElementById('timeUnit').value;
+            const timePeriod = document.getElementById('timePeriod').value;
             
             if (!workflow.trim()) {
                 showError('Please describe your workflow');
@@ -596,8 +662,11 @@
             try {
                 // Build the prompt
                 let fullPrompt = workflow;
-                if (hours && hours > 0) {
-                    fullPrompt += `\n\nTime required: ${hours} hours per ${period}.`;
+                if (workflowName) {
+                    fullPrompt = `Workflow: ${workflowName}\n\n${fullPrompt}`;
+                }
+                if (timeAmount && timeAmount > 0) {
+                    fullPrompt += `\n\nTime required: ${timeAmount} ${timeUnit} per ${timePeriod}.`;
                 }
                 
                 const response = await fetch('/api/analyze', {
@@ -613,7 +682,7 @@
                 }
                 
                 const data = await response.json();
-                displayResults(workflow, data.analysis);
+                displayResults(workflowName || "Your Workflow", workflow, data.analysis);
                 
             } catch (error) {
                 showError('Error: ' + error.message + '. Please try again.');
@@ -629,7 +698,7 @@
             errorDiv.classList.add('show');
         }
 
-        function displayResults(workflow, analysis) {
+        function displayResults(workflowName, workflow, analysis) {
             const resultsDiv = document.getElementById('results');
             
             // Extract key metrics from analysis
@@ -639,7 +708,7 @@
             
             resultsDiv.innerHTML = `
                 <div class="workflow-card">
-                    <h3>Your Workflow</h3>
+                    <h3>${workflowName}</h3>
                     <p>${workflow.substring(0, 300)}${workflow.length > 300 ? '...' : ''}</p>
                 </div>
                 
