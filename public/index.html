@@ -15,6 +15,7 @@
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
             background: linear-gradient(135deg, #4a5568 0%, #2d3748 100%);
             min-height: 100vh;
+            padding: 0.5in;
         }
 
         .header {
@@ -25,6 +26,7 @@
             align-items: center;
             color: white;
             backdrop-filter: blur(10px);
+            border-radius: 12px 12px 0 0;
         }
 
         .header-left h1 {
@@ -61,9 +63,9 @@
 
         .container {
             max-width: 1400px;
-            margin: 20px auto;
+            margin: 0 auto;
             background: white;
-            border-radius: 12px;
+            border-radius: 0 0 12px 12px;
             overflow: hidden;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
         }
@@ -72,7 +74,7 @@
             display: grid;
             grid-template-columns: 400px 1fr;
             gap: 0;
-            min-height: calc(100vh - 140px);
+            min-height: calc(100vh - 200px);
         }
 
         .input-panel {
@@ -291,6 +293,26 @@
             font-size: 0.9em;
             color: #4b5563;
             line-height: 1.5;
+            display: flex;
+            gap: 10px;
+        }
+
+        .step-number {
+            background: #4a5568;
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.85em;
+            flex-shrink: 0;
+        }
+
+        .step-text {
+            flex: 1;
         }
 
         .metrics-grid {
@@ -338,33 +360,41 @@
             font-size: 1.2em;
         }
 
-        .opportunities-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
+        .carousel-container {
+            position: relative;
+            overflow: hidden;
+            padding: 0 50px;
+        }
+
+        .carousel-track {
+            display: flex;
             gap: 20px;
+            transition: transform 0.3s ease;
         }
 
         .opportunity-card {
+            min-width: calc(50% - 10px);
             background: #f9fafb;
             border-radius: 10px;
             padding: 25px;
             border-left: 4px solid #4a5568;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            flex-shrink: 0;
         }
 
-        .opportunity-card.quick-wins {
+        .opportunity-card.immediate-impact {
             border-left-color: #10b981;
         }
 
-        .opportunity-card.high-impact {
+        .opportunity-card.efficiency-gains {
             border-left-color: #3b82f6;
         }
 
-        .opportunity-card.strategic {
+        .opportunity-card.process-improvement {
             border-left-color: #8b5cf6;
         }
 
-        .opportunity-card.foundational {
+        .opportunity-card.data-quality {
             border-left-color: #f59e0b;
         }
 
@@ -388,19 +418,19 @@
             flex-shrink: 0;
         }
 
-        .opportunity-card.quick-wins .opportunity-number {
+        .opportunity-card.immediate-impact .opportunity-number {
             background: #10b981;
         }
 
-        .opportunity-card.high-impact .opportunity-number {
+        .opportunity-card.efficiency-gains .opportunity-number {
             background: #3b82f6;
         }
 
-        .opportunity-card.strategic .opportunity-number {
+        .opportunity-card.process-improvement .opportunity-number {
             background: #8b5cf6;
         }
 
-        .opportunity-card.foundational .opportunity-number {
+        .opportunity-card.data-quality .opportunity-number {
             background: #f59e0b;
         }
 
@@ -453,6 +483,66 @@
             color: #991b1b;
         }
 
+        .carousel-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #4a5568;
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2em;
+            transition: background 0.2s;
+            z-index: 10;
+            margin-top: 0;
+            padding: 0;
+        }
+
+        .carousel-button:hover {
+            background: #2d3748;
+        }
+
+        .carousel-button.prev {
+            left: 0;
+        }
+
+        .carousel-button.next {
+            right: 0;
+        }
+
+        .carousel-button:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 20px;
+        }
+
+        .carousel-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #d1d5db;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .carousel-dot.active {
+            background: #4a5568;
+            width: 25px;
+            border-radius: 5px;
+        }
+
         .action-buttons {
             display: flex;
             gap: 10px;
@@ -470,6 +560,10 @@
         }
 
         @media (max-width: 1024px) {
+            body {
+                padding: 20px;
+            }
+
             .main-layout {
                 grid-template-columns: 1fr;
             }
@@ -479,16 +573,21 @@
                 border-bottom: 1px solid #e5e7eb;
             }
 
-            .metrics-grid, .opportunities-grid, .workflow-steps {
+            .metrics-grid, .workflow-steps {
                 grid-template-columns: 1fr;
+            }
+
+            .opportunity-card {
+                min-width: 100%;
             }
         }
 
         @media print {
             body {
                 background: white;
+                padding: 0;
             }
-            .header, .input-panel, .action-buttons {
+            .header, .input-panel, .action-buttons, .carousel-button, .carousel-dots {
                 display: none;
             }
             .main-layout {
@@ -497,6 +596,13 @@
             .container {
                 box-shadow: none;
                 margin: 0;
+            }
+            .carousel-track {
+                flex-wrap: wrap;
+            }
+            .opportunity-card {
+                min-width: calc(50% - 10px);
+                page-break-inside: avoid;
             }
         }
     </style>
@@ -529,6 +635,11 @@
                         <option value="political">Political Contribution Tracking</option>
                         <option value="form4">Form 4 Filing</option>
                         <option value="gifts">Gift & Entertainment Reporting</option>
+                        <option value="kyc">KYC Document Review</option>
+                        <option value="regulatory">Regulatory Report Generation</option>
+                        <option value="transaction">Transaction Monitoring Review</option>
+                        <option value="audit">Audit Trail Documentation</option>
+                        <option value="policy">Policy Exception Approval</option>
                     </select>
                     
                     <label>Name Your Workflow:</label>
@@ -594,40 +705,77 @@
         const templates = {
             lobbying: {
                 name: "Quarterly Lobbying Disclosure (LD-2)",
-                description: "Our team processes quarterly lobbying disclosure reports (LD-2) for 50+ clients. The workflow involves:\n- Collecting activity data from multiple departments via email\n- Manually categorizing expenses across 12+ disclosure categories\n- Cross-referencing against federal and state requirements\n- Preparing forms in various formats (LD-2, state-specific forms)\n- Internal review and approval process\n- Filing with government agencies\n- Tracking deadlines in shared calendars\nCurrently takes 40-60 hours per quarter per analyst.",
+                description: "Our team processes quarterly lobbying disclosure reports (LD-2) for 50+ clients. The workflow involves:\n- Collecting activity data from multiple departments via email\n- Manually categorizing expenses across 12+ disclosure categories\n- Cross-referencing against federal and state requirements\n- Preparing forms in various formats (LD-2, state-specific forms)\n- Internal review and approval process\n- Filing with government agencies\n- Tracking deadlines in shared calendars",
                 timeAmount: 50,
                 timeUnit: "hours",
                 timePeriod: "quarter"
             },
             insider: {
                 name: "Insider Trading Pre-Clearance",
-                description: "We manage insider trading pre-clearance requests for 300+ executives. Current process:\n- Employee submits trade request via email\n- Compliance officer manually checks against blackout periods\n- Review trading windows and material non-public information\n- Cross-reference with existing positions and prior trades\n- Email approval/denial back to employee\n- Log all requests in Excel spreadsheet\n- Quarterly reconciliation with actual trades\nTakes 15-30 minutes per request, with 50-100 requests weekly.",
+                description: "We manage insider trading pre-clearance requests for 300+ executives. Current process:\n- Employee submits trade request via email\n- Compliance officer manually checks against blackout periods\n- Review trading windows and material non-public information\n- Cross-reference with existing positions and prior trades\n- Email approval/denial back to employee\n- Log all requests in Excel spreadsheet\n- Quarterly reconciliation with actual trades",
                 timeAmount: 20,
                 timeUnit: "minutes",
                 timePeriod: "request"
             },
             political: {
                 name: "Political Contribution Tracking",
-                description: "We track and approve political contributions for our organization:\n- Employees submit contribution requests via form\n- Compliance reviews against company PAC policies\n- Check contribution limits for federal/state/local candidates\n- Verify recipient eligibility\n- Approve/deny and notify requestor\n- Track all contributions in database\n- Quarterly reporting to leadership\n- Annual reconciliation for lobbying disclosure\nCurrently managing 200-300 contributions annually.",
+                description: "We track and approve political contributions for our organization:\n- Employees submit contribution requests via form\n- Compliance reviews against company PAC policies\n- Check contribution limits for federal/state/local candidates\n- Verify recipient eligibility\n- Approve/deny and notify requestor\n- Track all contributions in database\n- Quarterly reporting to leadership\n- Annual reconciliation for lobbying disclosure",
                 timeAmount: 30,
                 timeUnit: "minutes",
                 timePeriod: "request"
             },
             form4: {
                 name: "Form 4 Filing",
-                description: "We prepare Form 4 filings for insider transactions:\n- Monitor trading notifications from brokerage\n- Validate transaction details with insider\n- Calculate reportable quantities and values\n- Prepare Form 4 XML file\n- Review for accuracy\n- Submit via EDGAR system\n- Maintain filing records\nProcessing 50-75 filings monthly, 2-3 hours each.",
+                description: "We prepare Form 4 filings for insider transactions:\n- Monitor trading notifications from brokerage\n- Validate transaction details with insider\n- Calculate reportable quantities and values\n- Prepare Form 4 XML file\n- Review for accuracy\n- Submit via EDGAR system\n- Maintain filing records",
                 timeAmount: 2.5,
                 timeUnit: "hours",
                 timePeriod: "request"
             },
             gifts: {
                 name: "Gift & Entertainment Reporting",
-                description: "We manage gift and entertainment compliance:\n- Employees submit gift/entertainment reports\n- Review against policy limits and restrictions\n- Check for conflicts of interest\n- Approve or escalate for senior review\n- Log in tracking system\n- Quarterly reporting to leadership\n- Annual audit preparation\nProcessing 300-400 reports annually, 30 minutes each.",
+                description: "We manage gift and entertainment compliance:\n- Employees submit gift/entertainment reports\n- Review against policy limits and restrictions\n- Check for conflicts of interest\n- Approve or escalate for senior review\n- Log in tracking system\n- Quarterly reporting to leadership\n- Annual audit preparation",
                 timeAmount: 30,
                 timeUnit: "minutes",
                 timePeriod: "request"
+            },
+            kyc: {
+                name: "KYC Document Review",
+                description: "Manual review of customer identification documents:\n- Download documents from multiple systems\n- Verify passport and address proof\n- Cross-reference against watchlists\n- Manual data entry into compliance database\n- Sanctions screening\n- Final approval sign-off\n- Document quality issues and inconsistent naming conventions",
+                timeAmount: 12,
+                timeUnit: "hours",
+                timePeriod: "week"
+            },
+            regulatory: {
+                name: "Regulatory Report Generation",
+                description: "Monthly compilation of regulatory reports:\n- Extract data from multiple systems (trading, risk, accounting)\n- Manual reconciliation of figures\n- Format according to regulatory requirements\n- Data validation and consistency checks\n- Senior management review\n- Submit to regulatory authorities\n- Maintain audit trail documentation",
+                timeAmount: 40,
+                timeUnit: "hours",
+                timePeriod: "month"
+            },
+            transaction: {
+                name: "Transaction Monitoring Review",
+                description: "Daily review of flagged transactions:\n- Analyze transaction patterns for suspicious activity\n- Gather supporting documentation\n- Research customer backgrounds\n- Check multiple databases\n- Determine whether to escalate or file SARs\n- Extensive documentation of findings\n- High false positive rate creates manual workload",
+                timeAmount: 15,
+                timeUnit: "hours",
+                timePeriod: "week"
+            },
+            audit: {
+                name: "Audit Trail Documentation",
+                description: "Maintaining comprehensive audit trails:\n- Document each compliance decision\n- Attach supporting evidence\n- Route for approvals across teams\n- Version control of documents\n- Archive records per retention policies\n- Ensure completeness for regulatory examinations\n- Coordinate across multiple stakeholders",
+                timeAmount: 20,
+                timeUnit: "hours",
+                timePeriod: "month"
+            },
+            policy: {
+                name: "Policy Exception Approval",
+                description: "Processing requests for policy exceptions:\n- Conduct detailed risk assessment\n- Consult with stakeholders\n- Route through multiple approval levels\n- Document exception rationale\n- Set up ongoing monitoring\n- Track exception status and expiration dates\n- Manual email-based process causes delays",
+                timeAmount: 8,
+                timeUnit: "hours",
+                timePeriod: "week"
             }
         };
+
+        let currentSlide = 0;
 
         document.getElementById('templateSelect').addEventListener('change', function() {
             const template = this.value;
@@ -722,27 +870,32 @@
             const timeSavings = extractMetric(analysis, 'time savings', '%');
             const riskReduction = extractMetric(analysis, 'risk', '%');
             
-            // Build step cards
+            // Build step cards with numbers
             let stepsHTML = '';
             if (steps.length > 0) {
                 stepsHTML = '<div class="workflow-steps">';
-                steps.forEach(step => {
-                    stepsHTML += `<div class="workflow-step">${step}</div>`;
+                steps.forEach((step, idx) => {
+                    stepsHTML += `
+                        <div class="workflow-step">
+                            <div class="step-number">${idx + 1}</div>
+                            <div class="step-text">${step}</div>
+                        </div>
+                    `;
                 });
                 stepsHTML += '</div>';
             } else {
                 stepsHTML = `<p style="color: #4b5563; line-height: 1.6;">${workflow.substring(0, 300)}${workflow.length > 300 ? '...' : ''}</p>`;
             }
             
-            // Create 4 opportunity cards
+            // Create 4 opportunity cards with better headers
             const opportunities = [
-                { category: 'Quick Wins', title: 'Automated Data Collection', description: 'Implement automated systems to gather compliance data from multiple sources, eliminating manual email collection and data entry tasks.', complexity: 'Low', class: 'quick-wins' },
-                { category: 'High Impact', title: 'Real-Time Compliance Checking', description: 'Integrate with regulatory databases for instant validation against current rules, limits, and restrictions, reducing manual lookups.', complexity: 'Medium', class: 'high-impact' },
-                { category: 'Strategic', title: 'Intelligent Workflow Routing', description: 'Automatically route requests to appropriate reviewers based on complexity, risk level, and expertise requirements.', complexity: 'Medium', class: 'strategic' },
-                { category: 'Foundational', title: 'Automated Documentation & Audit Trails', description: 'Generate audit trails, reports, and filing documents automatically based on structured data inputs, ensuring compliance.', complexity: 'Low', class: 'foundational' }
+                { category: 'Immediate Impact', title: 'Automated Data Collection', description: 'Implement automated systems to gather compliance data from multiple sources, eliminating manual email collection and data entry tasks.', complexity: 'Low', class: 'immediate-impact' },
+                { category: 'Efficiency Gains', title: 'Real-Time Compliance Checking', description: 'Integrate with regulatory databases for instant validation against current rules, limits, and restrictions, reducing manual lookups.', complexity: 'Medium', class: 'efficiency-gains' },
+                { category: 'Process Improvement', title: 'Intelligent Workflow Routing', description: 'Automatically route requests to appropriate reviewers based on complexity, risk level, and expertise requirements.', complexity: 'Medium', class: 'process-improvement' },
+                { category: 'Data Quality', title: 'Automated Documentation & Audit Trails', description: 'Generate audit trails, reports, and filing documents automatically based on structured data inputs, ensuring compliance.', complexity: 'Low', class: 'data-quality' }
             ];
             
-            let opportunitiesHTML = '';
+            let opportunitiesHTML = '<div class="carousel-track" id="carouselTrack">';
             opportunities.forEach((opp, idx) => {
                 opportunitiesHTML += `
                     <div class="opportunity-card ${opp.class}">
@@ -758,6 +911,14 @@
                     </div>
                 `;
             });
+            opportunitiesHTML += '</div>';
+            
+            // Create carousel dots
+            let dotsHTML = '<div class="carousel-dots">';
+            for (let i = 0; i < opportunities.length - 1; i++) {
+                dotsHTML += `<div class="carousel-dot ${i === 0 ? 'active' : ''}" onclick="goToSlide(${i})"></div>`;
+            }
+            dotsHTML += '</div>';
             
             resultsDiv.innerHTML = `
                 <div class="workflow-card">
@@ -780,9 +941,12 @@
                 
                 <div class="opportunities-section">
                     <h3>Automation Opportunities</h3>
-                    <div class="opportunities-grid">
+                    <div class="carousel-container">
+                        <button class="carousel-button prev" onclick="prevSlide()">‹</button>
                         ${opportunitiesHTML}
+                        <button class="carousel-button next" onclick="nextSlide()">›</button>
                     </div>
+                    ${dotsHTML}
                 </div>
                 
                 <div class="action-buttons">
@@ -791,6 +955,50 @@
             `;
             
             resultsDiv.classList.add('show');
+            currentSlide = 0;
+            updateCarousel();
+        }
+
+        function updateCarousel() {
+            const track = document.getElementById('carouselTrack');
+            const dots = document.querySelectorAll('.carousel-dot');
+            const prevBtn = document.querySelector('.carousel-button.prev');
+            const nextBtn = document.querySelector('.carousel-button.next');
+            
+            if (track) {
+                // Show 2 cards at a time, scroll by 1
+                const slideWidth = track.children[0].offsetWidth + 20; // card width + gap
+                track.style.transform = `translateX(-${currentSlide * slideWidth}px)`;
+                
+                // Update dots
+                dots.forEach((dot, idx) => {
+                    dot.classList.toggle('active', idx === currentSlide);
+                });
+                
+                // Update button states
+                prevBtn.disabled = currentSlide === 0;
+                nextBtn.disabled = currentSlide >= track.children.length - 2; // -2 because we show 2 at a time
+            }
+        }
+
+        function nextSlide() {
+            const track = document.getElementById('carouselTrack');
+            if (currentSlide < track.children.length - 2) {
+                currentSlide++;
+                updateCarousel();
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 0) {
+                currentSlide--;
+                updateCarousel();
+            }
+        }
+
+        function goToSlide(n) {
+            currentSlide = n;
+            updateCarousel();
         }
 
         function extractMetric(text, keyword, unit) {
