@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compliance Workflow Optimizer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.95;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #333;
+            font-size: 0.95em;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1em;
+            font-family: inherit;
+            resize: vertical;
+            transition: border-color 0.3s;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .example-workflows {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+
+        .example-workflows h3 {
+            font-size: 1em;
+            color: #555;
+            margin-bottom: 12px;
+        }
+
+        .example-button {
+            display: inline-block;
+            padding: 8px 16px;
+            margin: 4px 4px 4px 0;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 0.85em;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .example-button:hover {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        button[type="submit"] {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        button[type="submit"]:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        button[type="submit"]:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .results {
+            display: none;
+        }
+
+        .results.show {
+            display: block;
+        }
+
+        .results h2 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+
+        .analysis-content {
+            line-height: 1.8;
+            color: #444;
+            white-space: pre-wrap;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            display: none;
+        }
+
+        .loading.show {
+            display: block;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .error {
+            background: #fee;
+            border: 1px solid #fcc;
+            color: #c33;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .error.show {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔍 Compliance Workflow Optimizer</h1>
+            <p>AI-Powered Analysis of Compliance Process Automation Opportunities</p>
+        </div>
+
+        <div class="card">
+            <form id="workflowForm">
+                <div class="form-group">
+                    <label for="workflow">Describe Your Compliance Workflow:</label>
+                    <div class="example-workflows">
+                        <h3>Quick Examples:</h3>
+                        <button type="button" class="example-button" data-example="quarterly-disclosure">Quarterly Lobbying Disclosure</button>
+                        <button type="button" class="example-button" data-example="insider-trading">Insider Trading Pre-Clearance</button>
+                        <button type="button" class="example-button" data-example="political-contributions">Political Contribution Tracking</button>
+                        <button type="button" class="example-button" data-example="regulatory-reporting">Regulatory Reporting</button>
+                    </div>
+                    <textarea 
+                        id="workflow" 
+                        name="workflow" 
+                        rows="8" 
+                        placeholder="Example: Our team manually reviews 200+ political contributions quarterly, cross-referencing against 15 different state databases, generating reports, and tracking follow-up items in spreadsheets..."
+                        required
+                    ></textarea>
+                </div>
+                <button type="submit">Analyze Workflow</button>
+            </form>
+
+            <div class="error" id="error"></div>
+
+            <div class="loading" id="loading">
+                <div class="spinner"></div>
+                <p>Analyzing your workflow with AI...</p>
+            </div>
+        </div>
+
+        <div class="card results" id="results">
+            <h2>📊 Analysis Results</h2>
+            <div class="analysis-content" id="analysisContent"></div>
+        </div>
+    </div>
+
+    <script>
+        const examples = {
+            'quarterly-disclosure': `Our team processes quarterly lobbying disclosure reports for 50+ clients. The workflow involves:
+- Collecting activity data from multiple departments via email
+- Manually categorizing expenses across 12+ disclosure categories
+- Cross-referencing against federal and state requirements
+- Preparing forms in various formats (LD-2, state-specific forms)
+- Internal review and approval process
+- Filing with government agencies
+- Tracking deadlines in shared calendars
+Currently takes 40-60 hours per quarter per analyst.`,
+
+            'insider-trading': `We manage insider trading pre-clearance requests for 300+ executives and employees. Current process:
+- Employee submits trade request via email
+- Compliance officer manually checks against blackout periods
+- Review trading windows and recent material non-public information
+- Cross-reference with existing positions and prior trades
+- Email approval/denial back to employee
+- Log all requests in Excel spreadsheet
+- Quarterly reconciliation with actual trades from brokerage
+Takes 15-30 minutes per request, with 50-100 requests weekly.`,
+
+            'political-contributions': `We track and approve political contributions for our organization. Process includes:
+- Employees submit contribution requests via form
+- Compliance reviews against company PAC policies
+- Check contribution limits for federal/state/local candidates
+- Verify recipient eligibility
+- Approve/deny and notify requestor
+- Track all contributions in database
+- Quarterly reporting to leadership
+- Annual reconciliation for lobbying disclosure
+Currently managing 200-300 contributions annually with manual tracking.`,
+
+            'regulatory-reporting': `We prepare monthly regulatory reports for financial compliance. Current workflow:
+- Extract data from 5 different systems (trading, accounting, CRM, risk, operations)
+- Manual data validation and reconciliation
+- Apply regulatory calculations and formulas
+- Format data according to regulatory specifications
+- Internal review by senior analyst
+- Generate PDF reports
+- Submit through regulatory portal
+- Maintain audit trail documentation
+Takes 3-4 days monthly with high error risk during manual steps.`
+        };
+
+        // Handle example button clicks
+        document.querySelectorAll('.example-button').forEach(button => {
+            button.addEventListener('click', function() {
+                const example = this.getAttribute('data-example');
+                document.getElementById('workflow').value = examples[example];
+            });
+        });
+
+        // Handle form submission
+        document.getElementById('workflowForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const workflow = document.getElementById('workflow').value;
+            const loadingDiv = document.getElementById('loading');
+            const resultsDiv = document.getElementById('results');
+            const errorDiv = document.getElementById('error');
+            const submitButton = document.querySelector('button[type="submit"]');
+            
+            // Hide previous results and errors
+            resultsDiv.classList.remove('show');
+            errorDiv.classList.remove('show');
+            
+            // Show loading state
+            loadingDiv.classList.add('show');
+            submitButton.disabled = true;
+            
+            try {
+                const response = await fetch('/api/analyze', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ workflowDescription: workflow })
+                });
+                
+                if (!response.ok) {
+                    throw new Error('Failed to analyze workflow');
+                }
+                
+                const data = await response.json();
+                
+                // Display results
+                document.getElementById('analysisContent').textContent = data.analysis;
+                resultsDiv.classList.add('show');
+                
+                // Scroll to results
+                resultsDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                
+            } catch (error) {
+                errorDiv.textContent = 'Error: ' + error.message + '. Please try again.';
+                errorDiv.classList.add('show');
+            } finally {
+                loadingDiv.classList.remove('show');
+                submitButton.disabled = false;
+            }
+        });
+    </script>
+</body>
+</html>
