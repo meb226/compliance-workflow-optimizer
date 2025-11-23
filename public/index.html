@@ -118,7 +118,6 @@
             font-size: 0.95em;
             font-family: inherit;
             transition: border-color 0.3s;
-            margin-bottom: 0;
         }
 
         select:focus, textarea:focus, input[type="text"]:focus {
@@ -135,7 +134,6 @@
             display: flex;
             align-items: center;
             gap: 10px;
-            margin-bottom: 0;
         }
 
         .time-input-group input {
@@ -149,7 +147,6 @@
 
         .time-input-group select {
             flex: 1;
-            margin-bottom: 0;
             min-width: 100px;
         }
 
@@ -186,6 +183,32 @@
         button:disabled {
             opacity: 0.6;
             cursor: not-allowed;
+        }
+
+        .export-card {
+            margin-top: 20px;
+            padding: 20px;
+            background: #f9fafb;
+            border-radius: 8px;
+            border: 2px solid #e5e7eb;
+        }
+
+        .export-card h3 {
+            font-size: 1em;
+            color: #374151;
+            margin-bottom: 15px;
+        }
+
+        .export-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .export-buttons button {
+            flex: 1;
+            padding: 12px;
+            font-size: 0.9em;
+            margin-top: 0;
         }
 
         .loading {
@@ -233,13 +256,6 @@
             color: #9ca3af;
         }
 
-        .empty-state svg {
-            width: 80px;
-            height: 80px;
-            margin-bottom: 20px;
-            opacity: 0.5;
-        }
-
         .results {
             display: none;
         }
@@ -258,14 +274,23 @@
 
         .workflow-card h3 {
             color: #1f2937;
-            margin-bottom: 12px;
+            margin-bottom: 15px;
             font-size: 1.1em;
         }
 
-        .workflow-card p {
+        .workflow-steps {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .workflow-step {
+            background: white;
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 0.9em;
             color: #4b5563;
-            line-height: 1.6;
-            font-size: 0.95em;
+            line-height: 1.5;
         }
 
         .metrics-grid {
@@ -276,7 +301,7 @@
         }
 
         .metric-card {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
             padding: 25px;
             border-radius: 10px;
             color: white;
@@ -307,150 +332,110 @@
             margin-top: 30px;
         }
 
-        .opportunities-section h3 {
+        .opportunities-section > h3 {
             color: #1f2937;
             margin-bottom: 20px;
             font-size: 1.2em;
         }
 
-        .carousel-container {
-            position: relative;
+        .opportunities-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .opportunity-card {
             background: #f9fafb;
             border-radius: 10px;
-            padding: 30px;
-            min-height: 250px;
+            padding: 25px;
+            border-left: 4px solid #4a5568;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
         }
 
-        .carousel-slide {
-            display: none;
+        .opportunity-card.quick-wins {
+            border-left-color: #10b981;
         }
 
-        .carousel-slide.active {
-            display: block;
-            animation: fadeIn 0.5s;
+        .opportunity-card.high-impact {
+            border-left-color: #3b82f6;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+        .opportunity-card.strategic {
+            border-left-color: #8b5cf6;
+        }
+
+        .opportunity-card.foundational {
+            border-left-color: #f59e0b;
+        }
+
+        .opportunity-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 15px;
         }
 
         .opportunity-number {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
             width: 35px;
             height: 35px;
             background: #4a5568;
             color: white;
             border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-weight: bold;
-            margin-bottom: 15px;
+            flex-shrink: 0;
+        }
+
+        .opportunity-card.quick-wins .opportunity-number {
+            background: #10b981;
+        }
+
+        .opportunity-card.high-impact .opportunity-number {
+            background: #3b82f6;
+        }
+
+        .opportunity-card.strategic .opportunity-number {
+            background: #8b5cf6;
+        }
+
+        .opportunity-card.foundational .opportunity-number {
+            background: #f59e0b;
+        }
+
+        .opportunity-category {
+            flex: 1;
+        }
+
+        .category-label {
+            font-size: 0.75em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #6b7280;
+            font-weight: 600;
         }
 
         .opportunity-title {
-            font-size: 1.1em;
+            font-size: 1.05em;
             font-weight: 600;
             color: #1f2937;
-            margin-bottom: 12px;
+            margin-top: 2px;
         }
 
         .opportunity-description {
             color: #4b5563;
-            line-height: 1.7;
-        }
-
-        .carousel-controls {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 20px;
-        }
-
-        .carousel-dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: #d1d5db;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .carousel-dot.active {
-            background: #4a5568;
-            width: 25px;
-            border-radius: 5px;
-        }
-
-        .carousel-arrows {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 15px;
-        }
-
-        .carousel-arrow {
-            background: #4a5568;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 0.9em;
-            transition: background 0.2s;
-            width: auto;
-            margin-top: 0;
-        }
-
-        .carousel-arrow:hover {
-            background: #2d3748;
-        }
-
-        .analysis-section {
-            margin-top: 30px;
-            padding: 25px;
-            background: #f9fafb;
-            border-radius: 10px;
-            border-left: 4px solid #4a5568;
-        }
-
-        .analysis-section h3 {
-            color: #1f2937;
-            margin-bottom: 15px;
-            font-size: 1.1em;
-        }
-
-        .analysis-content {
-            line-height: 1.8;
-            color: #4b5563;
-        }
-
-        .analysis-content h4 {
-            color: #1f2937;
-            margin: 15px 0 10px 0;
-            font-size: 1.05em;
-            font-weight: 600;
-        }
-
-        .analysis-content p {
-            margin: 12px 0;
-        }
-
-        .analysis-content ul {
-            margin: 12px 0 12px 25px;
-        }
-
-        .analysis-content li {
-            margin: 8px 0;
+            line-height: 1.6;
+            font-size: 0.95em;
         }
 
         .complexity-badge {
             display: inline-block;
             padding: 4px 10px;
             border-radius: 12px;
-            font-size: 0.8em;
+            font-size: 0.75em;
             font-weight: 600;
-            margin-left: 8px;
+            margin-top: 12px;
         }
 
         .complexity-low {
@@ -476,6 +461,8 @@
 
         .btn-secondary {
             background: #6b7280;
+            flex: 1;
+            margin-top: 0;
         }
 
         .btn-secondary:hover {
@@ -492,8 +479,24 @@
                 border-bottom: 1px solid #e5e7eb;
             }
 
-            .metrics-grid {
+            .metrics-grid, .opportunities-grid, .workflow-steps {
                 grid-template-columns: 1fr;
+            }
+        }
+
+        @media print {
+            body {
+                background: white;
+            }
+            .header, .input-panel, .action-buttons {
+                display: none;
+            }
+            .main-layout {
+                grid-template-columns: 1fr;
+            }
+            .container {
+                box-shadow: none;
+                margin: 0;
             }
         }
     </style>
@@ -554,6 +557,14 @@
                     
                     <button type="submit">Analyze Workflow</button>
                 </form>
+
+                <div class="export-card" id="exportCard" style="display: none;">
+                    <h3>Export Analysis</h3>
+                    <div class="export-buttons">
+                        <button type="button" onclick="exportToPDF()">Save as PDF</button>
+                        <button type="button" onclick="copyToClipboard()">Copy to Clipboard</button>
+                    </div>
+                </div>
             </div>
 
             <!-- Right Panel: Results -->
@@ -648,12 +659,14 @@
             const resultsDiv = document.getElementById('results');
             const errorDiv = document.getElementById('error');
             const emptyState = document.getElementById('emptyState');
+            const exportCard = document.getElementById('exportCard');
             const submitButton = document.querySelector('button[type="submit"]');
             
             // Hide previous states
             resultsDiv.classList.remove('show');
             errorDiv.classList.remove('show');
             emptyState.style.display = 'none';
+            exportCard.style.display = 'none';
             
             // Show loading
             loadingDiv.classList.add('show');
@@ -682,7 +695,8 @@
                 }
                 
                 const data = await response.json();
-                displayResults(workflowName || "Your Workflow", workflow, data.analysis);
+                displayResults(workflowName || "Your Workflow", workflow, data.analysis, timeAmount, timeUnit, timePeriod);
+                exportCard.style.display = 'block';
                 
             } catch (error) {
                 showError('Error: ' + error.message + '. Please try again.');
@@ -698,39 +712,76 @@
             errorDiv.classList.add('show');
         }
 
-        function displayResults(workflowName, workflow, analysis) {
+        function displayResults(workflowName, workflow, analysis, timeAmount, timeUnit, timePeriod) {
             const resultsDiv = document.getElementById('results');
             
-            // Extract key metrics from analysis
-            const timeSavings = extractMetric(analysis, 'time savings', 'hour', '%');
-            const riskReduction = extractMetric(analysis, 'risk reduction', '%', 'point');
-            const opportunities = extractOpportunities(analysis);
+            // Parse workflow steps
+            const steps = workflow.split('\n').filter(line => line.trim().startsWith('-')).map(line => line.trim().substring(1).trim());
+            
+            // Extract metrics
+            const timeSavings = extractMetric(analysis, 'time savings', '%');
+            const riskReduction = extractMetric(analysis, 'risk', '%');
+            
+            // Build step cards
+            let stepsHTML = '';
+            if (steps.length > 0) {
+                stepsHTML = '<div class="workflow-steps">';
+                steps.forEach(step => {
+                    stepsHTML += `<div class="workflow-step">${step}</div>`;
+                });
+                stepsHTML += '</div>';
+            } else {
+                stepsHTML = `<p style="color: #4b5563; line-height: 1.6;">${workflow.substring(0, 300)}${workflow.length > 300 ? '...' : ''}</p>`;
+            }
+            
+            // Create 4 opportunity cards
+            const opportunities = [
+                { category: 'Quick Wins', title: 'Automated Data Collection', description: 'Implement automated systems to gather compliance data from multiple sources, eliminating manual email collection and data entry tasks.', complexity: 'Low', class: 'quick-wins' },
+                { category: 'High Impact', title: 'Real-Time Compliance Checking', description: 'Integrate with regulatory databases for instant validation against current rules, limits, and restrictions, reducing manual lookups.', complexity: 'Medium', class: 'high-impact' },
+                { category: 'Strategic', title: 'Intelligent Workflow Routing', description: 'Automatically route requests to appropriate reviewers based on complexity, risk level, and expertise requirements.', complexity: 'Medium', class: 'strategic' },
+                { category: 'Foundational', title: 'Automated Documentation & Audit Trails', description: 'Generate audit trails, reports, and filing documents automatically based on structured data inputs, ensuring compliance.', complexity: 'Low', class: 'foundational' }
+            ];
+            
+            let opportunitiesHTML = '';
+            opportunities.forEach((opp, idx) => {
+                opportunitiesHTML += `
+                    <div class="opportunity-card ${opp.class}">
+                        <div class="opportunity-header">
+                            <div class="opportunity-number">${idx + 1}</div>
+                            <div class="opportunity-category">
+                                <div class="category-label">${opp.category}</div>
+                                <div class="opportunity-title">${opp.title}</div>
+                            </div>
+                        </div>
+                        <div class="opportunity-description">${opp.description}</div>
+                        <span class="complexity-badge complexity-${opp.complexity.toLowerCase()}">${opp.complexity} Complexity</span>
+                    </div>
+                `;
+            });
             
             resultsDiv.innerHTML = `
                 <div class="workflow-card">
                     <h3>${workflowName}</h3>
-                    <p>${workflow.substring(0, 300)}${workflow.length > 300 ? '...' : ''}</p>
+                    ${stepsHTML}
                 </div>
                 
                 <div class="metrics-grid">
                     <div class="metric-card">
                         <h3>Time Savings</h3>
                         <div class="metric-value">${timeSavings}</div>
-                        <div class="metric-subtitle">Estimated efficiency gain</div>
+                        <div class="metric-subtitle">saved per ${timePeriod}</div>
                     </div>
                     <div class="metric-card">
                         <h3>Risk Reduction</h3>
                         <div class="metric-value">${riskReduction}</div>
-                        <div class="metric-subtitle">Compliance improvement</div>
+                        <div class="metric-subtitle">fewer manual errors</div>
                     </div>
                 </div>
                 
-                ${opportunities.length > 0 ? createCarousel(opportunities) : ''}
-                
-                <div class="analysis-section">
-                    <h3>Detailed Analysis</h3>
-                    <div class="analysis-content">
-                        ${formatAnalysis(analysis)}
+                <div class="opportunities-section">
+                    <h3>Automation Opportunities</h3>
+                    <div class="opportunities-grid">
+                        ${opportunitiesHTML}
                     </div>
                 </div>
                 
@@ -740,184 +791,54 @@
             `;
             
             resultsDiv.classList.add('show');
-            
-            // Initialize carousel if opportunities exist
-            if (opportunities.length > 0) {
-                initCarousel();
-            }
         }
 
-        function extractMetric(text, keyword, unit1, unit2) {
-            const patterns = [
-                new RegExp(`(\\d+)[-–]?(\\d+)?\\s*${unit1}s?`, 'i'),
-                new RegExp(`(\\d+)[-–]?(\\d+)?\\s*${unit2}s?`, 'i'),
-                new RegExp(`(\\d+)[-–]?(\\d+)?%`, 'i')
-            ];
-            
+        function extractMetric(text, keyword, unit) {
+            const pattern = new RegExp(`(\\d+)[-–]?(\\d+)?\\s*${unit}`, 'i');
             const section = text.toLowerCase().includes(keyword) ? 
                 text.substring(text.toLowerCase().indexOf(keyword), text.toLowerCase().indexOf(keyword) + 200) : text;
             
-            for (const pattern of patterns) {
-                const match = section.match(pattern);
-                if (match) {
-                    return match[2] ? `${match[1]}-${match[2]}${match[0].includes('%') ? '%' : ''}` : match[0];
-                }
+            const match = section.match(pattern);
+            if (match) {
+                return match[2] ? `${match[1]}-${match[2]}%` : `${match[1]}%`;
             }
             
             return keyword.includes('time') ? '40-60%' : '30-50%';
         }
 
-        function extractOpportunities(text) {
-            const opportunities = [
-                {
-                    title: "Automated Data Collection",
-                    description: "Implement automated systems to gather compliance data from multiple sources, eliminating manual email collection and data entry tasks."
-                },
-                {
-                    title: "Pre-Assessment Validation",
-                    description: "Use AI-powered validation to check data completeness and accuracy before human review, catching errors early in the process."
-                },
-                {
-                    title: "Intelligent Workflow Routing",
-                    description: "Automatically route requests to appropriate reviewers based on complexity, risk level, and expertise requirements."
-                },
-                {
-                    title: "Real-Time Compliance Checking",
-                    description: "Integrate with regulatory databases for instant validation against current rules, limits, and restrictions."
-                },
-                {
-                    title: "Automated Documentation",
-                    description: "Generate audit trails, reports, and filing documents automatically based on structured data inputs."
-                }
-            ];
-            
-            return opportunities;
+        function exportToPDF() {
+            window.print();
         }
 
-        function createCarousel(opportunities) {
-            let html = `
-                <div class="opportunities-section">
-                    <h3>Automation Opportunities</h3>
-                    <div class="carousel-container">
-            `;
+        function copyToClipboard() {
+            const workflowCard = document.querySelector('.workflow-card');
+            const metrics = document.querySelectorAll('.metric-card');
+            const opportunities = document.querySelectorAll('.opportunity-card');
             
-            opportunities.forEach((opp, index) => {
-                html += `
-                    <div class="carousel-slide ${index === 0 ? 'active' : ''}" data-slide="${index}">
-                        <div class="opportunity-number">${index + 1}</div>
-                        <div class="opportunity-title">${opp.title}</div>
-                        <div class="opportunity-description">${opp.description}</div>
-                    </div>
-                `;
+            let text = workflowCard.innerText + '\n\n';
+            
+            metrics.forEach(metric => {
+                text += metric.innerText + '\n\n';
             });
             
-            html += `
-                    </div>
-                    <div class="carousel-arrows">
-                        <button class="carousel-arrow" onclick="prevSlide()">← Previous</button>
-                        <button class="carousel-arrow" onclick="nextSlide()">Next →</button>
-                    </div>
-                    <div class="carousel-controls" id="carouselDots"></div>
-                </div>
-            `;
-            
-            return html;
-        }
-
-        let currentSlide = 0;
-        let totalSlides = 0;
-
-        function initCarousel() {
-            const slides = document.querySelectorAll('.carousel-slide');
-            totalSlides = slides.length;
-            
-            // Create dots
-            const dotsContainer = document.getElementById('carouselDots');
-            dotsContainer.innerHTML = '';
-            for (let i = 0; i < totalSlides; i++) {
-                const dot = document.createElement('div');
-                dot.className = `carousel-dot ${i === 0 ? 'active' : ''}`;
-                dot.onclick = () => goToSlide(i);
-                dotsContainer.appendChild(dot);
-            }
-        }
-
-        function showSlide(n) {
-            const slides = document.querySelectorAll('.carousel-slide');
-            const dots = document.querySelectorAll('.carousel-dot');
-            
-            if (n >= totalSlides) currentSlide = 0;
-            if (n < 0) currentSlide = totalSlides - 1;
-            
-            slides.forEach(slide => slide.classList.remove('active'));
-            dots.forEach(dot => dot.classList.remove('active'));
-            
-            slides[currentSlide].classList.add('active');
-            dots[currentSlide].classList.add('active');
-        }
-
-        function nextSlide() {
-            currentSlide++;
-            showSlide(currentSlide);
-        }
-
-        function prevSlide() {
-            currentSlide--;
-            showSlide(currentSlide);
-        }
-
-        function goToSlide(n) {
-            currentSlide = n;
-            showSlide(currentSlide);
-        }
-
-        function formatAnalysis(text) {
-            // Convert markdown-style formatting to HTML
-            text = text.replace(/\*\*\*([^*]+)\*\*\*/g, '<strong><em>$1</em></strong>');
-            text = text.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
-            text = text.replace(/\*([^*]+)\*/g, '<em>$1</em>');
-            
-            // Headers
-            text = text.replace(/###\s*([^\n]+)/g, '<h4>$1</h4>');
-            
-            // Complexity badges
-            text = text.replace(/\(Low\)/gi, '<span class="complexity-badge complexity-low">Low</span>');
-            text = text.replace(/\(Medium\)/gi, '<span class="complexity-badge complexity-medium">Medium</span>');
-            text = text.replace(/\(High\)/gi, '<span class="complexity-badge complexity-high">High</span>');
-            
-            // Lists
-            const lines = text.split('\n');
-            let inList = false;
-            let result = [];
-            
-            lines.forEach(line => {
-                const trimmed = line.trim();
-                if (trimmed.match(/^[-•*]\s+/)) {
-                    if (!inList) {
-                        result.push('<ul>');
-                        inList = true;
-                    }
-                    result.push('<li>' + trimmed.replace(/^[-•*]\s+/, '') + '</li>');
-                } else {
-                    if (inList) {
-                        result.push('</ul>');
-                        inList = false;
-                    }
-                    if (trimmed) {
-                        result.push('<p>' + trimmed + '</p>');
-                    }
-                }
+            text += 'AUTOMATION OPPORTUNITIES:\n\n';
+            opportunities.forEach(opp => {
+                text += opp.innerText + '\n\n';
             });
             
-            if (inList) result.push('</ul>');
-            
-            return result.join('\n');
+            navigator.clipboard.writeText(text).then(() => {
+                alert('Analysis copied to clipboard!');
+            }).catch(err => {
+                console.error('Failed to copy:', err);
+                alert('Failed to copy to clipboard');
+            });
         }
 
         function clearForm() {
             document.getElementById('workflowForm').reset();
             document.getElementById('results').classList.remove('show');
             document.getElementById('emptyState').style.display = 'block';
+            document.getElementById('exportCard').style.display = 'none';
         }
     </script>
 </body>
