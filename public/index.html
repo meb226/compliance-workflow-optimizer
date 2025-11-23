@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Compliance Workflow Optimizer</title>
+    <title>Compliance Workflow Optimizer | Mike Burns</title>
     <style>
         * {
             margin: 0;
@@ -12,148 +12,168 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
             min-height: 100vh;
-            padding: 40px 20px;
-        }
-
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
         }
 
         .header {
-            text-align: center;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             color: white;
-            margin-bottom: 40px;
+            backdrop-filter: blur(10px);
         }
 
-        .header h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
+        .header-left h1 {
+            font-size: 1.8em;
             font-weight: 700;
+            margin-bottom: 5px;
         }
 
-        .header p {
-            font-size: 1.1em;
-            opacity: 0.95;
+        .header-left p {
+            font-size: 0.95em;
+            opacity: 0.9;
         }
 
-        .card {
+        .header-right {
+            text-align: right;
+            font-size: 0.9em;
+        }
+
+        .header-right a {
+            color: white;
+            text-decoration: none;
+            opacity: 0.9;
+            transition: opacity 0.2s;
+        }
+
+        .header-right a:hover {
+            opacity: 1;
+            text-decoration: underline;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 20px auto;
             background: white;
             border-radius: 12px;
-            padding: 40px;
+            overflow: hidden;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            margin-bottom: 30px;
         }
 
-        .form-group {
+        .main-layout {
+            display: grid;
+            grid-template-columns: 400px 1fr;
+            gap: 0;
+            min-height: calc(100vh - 140px);
+        }
+
+        .input-panel {
+            padding: 40px;
+            border-right: 1px solid #e5e7eb;
+            background: #fafafa;
+            overflow-y: auto;
+        }
+
+        .results-panel {
+            padding: 40px;
+            background: white;
+            overflow-y: auto;
+        }
+
+        .panel-title {
+            font-size: 1.3em;
+            font-weight: 600;
+            color: #1f2937;
             margin-bottom: 25px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid #1e3a8a;
         }
 
         label {
             display: block;
             font-weight: 600;
             margin-bottom: 8px;
-            color: #333;
+            color: #374151;
+            font-size: 0.9em;
+        }
+
+        select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
             font-size: 0.95em;
+            font-family: inherit;
+            transition: border-color 0.3s;
+            margin-bottom: 20px;
+        }
+
+        select:focus, textarea:focus {
+            outline: none;
+            border-color: #1e3a8a;
         }
 
         textarea {
-            width: 100%;
-            padding: 15px;
+            resize: vertical;
+            min-height: 200px;
+        }
+
+        .time-input-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .time-input-group input {
+            width: 80px;
+            padding: 12px;
             border: 2px solid #e0e0e0;
             border-radius: 8px;
-            font-size: 1em;
-            font-family: inherit;
-            resize: vertical;
-            transition: border-color 0.3s;
+            font-size: 0.95em;
         }
 
-        textarea:focus {
+        .time-input-group select {
+            width: 130px;
+            margin-bottom: 0;
+        }
+
+        .time-input-group input:focus {
             outline: none;
-            border-color: #667eea;
+            border-color: #1e3a8a;
         }
 
-        .example-workflows {
-            background: #f8f9fa;
-            border-radius: 8px;
-            padding: 20px;
-            margin-bottom: 25px;
-        }
-
-        .example-workflows h3 {
-            font-size: 1em;
-            color: #555;
-            margin-bottom: 12px;
-        }
-
-        .example-button {
-            display: inline-block;
-            padding: 8px 16px;
-            margin: 4px 4px 4px 0;
-            background: white;
-            border: 1px solid #ddd;
-            border-radius: 6px;
-            font-size: 0.85em;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .example-button:hover {
-            background: #667eea;
-            color: white;
-            border-color: #667eea;
-        }
-
-        button[type="submit"] {
+        button {
             width: 100%;
             padding: 16px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
             color: white;
             border: none;
             border-radius: 8px;
-            font-size: 1.1em;
+            font-size: 1.05em;
             font-weight: 600;
             cursor: pointer;
             transition: transform 0.2s, box-shadow 0.2s;
         }
 
-        button[type="submit"]:hover:not(:disabled) {
+        button:hover:not(:disabled) {
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 5px 15px rgba(30, 58, 138, 0.4);
         }
 
-        button[type="submit"]:disabled {
+        button:disabled {
             opacity: 0.6;
             cursor: not-allowed;
         }
 
-        .results {
-            display: none;
-        }
-
-        .results.show {
-            display: block;
-        }
-
-        .results h2 {
-            color: #333;
-            margin-bottom: 20px;
-            font-size: 1.8em;
-        }
-
-        .analysis-content {
-            line-height: 1.8;
-            color: #444;
-            white-space: pre-wrap;
-        }
-
         .loading {
-            text-align: center;
-            padding: 40px;
             display: none;
+            text-align: center;
+            padding: 60px 20px;
         }
 
         .loading.show {
@@ -162,7 +182,7 @@
 
         .spinner {
             border: 4px solid #f3f3f3;
-            border-top: 4px solid #667eea;
+            border-top: 4px solid #1e3a8a;
             border-radius: 50%;
             width: 50px;
             height: 50px;
@@ -188,129 +208,404 @@
         .error.show {
             display: block;
         }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #9ca3af;
+        }
+
+        .empty-state svg {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 20px;
+            opacity: 0.5;
+        }
+
+        .results {
+            display: none;
+        }
+
+        .results.show {
+            display: block;
+        }
+
+        .workflow-card {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .workflow-card h3 {
+            color: #1e3a8a;
+            margin-bottom: 12px;
+            font-size: 1.1em;
+        }
+
+        .workflow-card p {
+            color: #4b5563;
+            line-height: 1.6;
+            font-size: 0.95em;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .metric-card {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            padding: 25px;
+            border-radius: 10px;
+            color: white;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .metric-card h3 {
+            font-size: 0.85em;
+            opacity: 0.95;
+            margin-bottom: 8px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .metric-value {
+            font-size: 2.2em;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .metric-subtitle {
+            font-size: 0.85em;
+            opacity: 0.9;
+        }
+
+        .opportunities-section {
+            margin-top: 30px;
+        }
+
+        .opportunities-section h3 {
+            color: #1e3a8a;
+            margin-bottom: 20px;
+            font-size: 1.2em;
+        }
+
+        .carousel-container {
+            position: relative;
+            background: #f9fafb;
+            border-radius: 10px;
+            padding: 30px;
+            min-height: 250px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .carousel-slide {
+            display: none;
+        }
+
+        .carousel-slide.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .opportunity-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 35px;
+            height: 35px;
+            background: #1e3a8a;
+            color: white;
+            border-radius: 50%;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .opportunity-title {
+            font-size: 1.1em;
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 12px;
+        }
+
+        .opportunity-description {
+            color: #4b5563;
+            line-height: 1.7;
+        }
+
+        .carousel-controls {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .carousel-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #d1d5db;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .carousel-dot.active {
+            background: #1e3a8a;
+            width: 25px;
+            border-radius: 5px;
+        }
+
+        .carousel-arrows {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+        }
+
+        .carousel-arrow {
+            background: #1e3a8a;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: background 0.2s;
+        }
+
+        .carousel-arrow:hover {
+            background: #1e40af;
+        }
+
+        .analysis-section {
+            margin-top: 30px;
+            padding: 25px;
+            background: #f9fafb;
+            border-radius: 10px;
+            border-left: 4px solid #1e3a8a;
+        }
+
+        .analysis-section h3 {
+            color: #1e3a8a;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .analysis-content {
+            line-height: 1.8;
+            color: #4b5563;
+        }
+
+        .analysis-content h4 {
+            color: #1f2937;
+            margin: 15px 0 10px 0;
+            font-size: 1.05em;
+            font-weight: 600;
+        }
+
+        .analysis-content p {
+            margin: 12px 0;
+        }
+
+        .analysis-content ul {
+            margin: 12px 0 12px 25px;
+        }
+
+        .analysis-content li {
+            margin: 8px 0;
+        }
+
+        .complexity-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.8em;
+            font-weight: 600;
+            margin-left: 8px;
+        }
+
+        .complexity-low {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .complexity-medium {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .complexity-high {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 25px;
+        }
+
+        .btn-secondary {
+            background: #6b7280;
+        }
+
+        .btn-secondary:hover {
+            background: #4b5563;
+        }
+
+        @media (max-width: 1024px) {
+            .main-layout {
+                grid-template-columns: 1fr;
+            }
+            
+            .input-panel {
+                border-right: none;
+                border-bottom: 1px solid #e5e7eb;
+            }
+
+            .metrics-grid {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 <body>
+    <div class="header">
+        <div class="header-left">
+            <h1>Compliance Workflow Optimizer</h1>
+            <p>AI-Powered RegTech Analysis</p>
+        </div>
+        <div class="header-right">
+            <div>Built by <strong>Mike Burns</strong></div>
+            <div><a href="https://linkedin.com/in/yourprofile" target="_blank">LinkedIn</a></div>
+        </div>
+    </div>
+
     <div class="container">
-        <div class="header">
-            <h1>🔍 Compliance Workflow Optimizer</h1>
-            <p>AI-Powered Analysis of Compliance Process Automation Opportunities</p>
-        </div>
-
-        <div class="card">
-            <form id="workflowForm">
-                <div class="form-group">
-                    <label for="workflow">Describe Your Compliance Workflow:</label>
-                    <div class="example-workflows">
-                        <h3>Quick Examples:</h3>
-                        <button type="button" class="example-button" data-example="quarterly-disclosure">Quarterly Lobbying Disclosure</button>
-                        <button type="button" class="example-button" data-example="insider-trading">Insider Trading Pre-Clearance</button>
-                        <button type="button" class="example-button" data-example="political-contributions">Political Contribution Tracking</button>
-                        <button type="button" class="example-button" data-example="regulatory-reporting">Regulatory Reporting</button>
+        <div class="main-layout">
+            <!-- Left Panel: Input -->
+            <div class="input-panel">
+                <h2 class="panel-title">Input Workflow</h2>
+                
+                <form id="workflowForm">
+                    <label>Select a Template:</label>
+                    <select id="templateSelect">
+                        <option value="">-- Choose a workflow template --</option>
+                        <option value="lobbying">Quarterly Lobbying Disclosure (LD-2)</option>
+                        <option value="insider">Insider Trading Pre-Clearance</option>
+                        <option value="political">Political Contribution Tracking</option>
+                        <option value="form4">Form 4 Filing</option>
+                        <option value="gifts">Gift & Entertainment Reporting</option>
+                    </select>
+                    
+                    <label>Describe Your Workflow:</label>
+                    <textarea id="workflow" placeholder="Describe your compliance workflow in detail..."></textarea>
+                    
+                    <label>Hours Required:</label>
+                    <div class="time-input-group">
+                        <input type="number" id="hours" placeholder="0" min="0" step="0.5">
+                        <span>per</span>
+                        <select id="period">
+                            <option value="week">week</option>
+                            <option value="month">month</option>
+                            <option value="quarter">quarter</option>
+                            <option value="year">year</option>
+                        </select>
                     </div>
-                    <textarea 
-                        id="workflow" 
-                        name="workflow" 
-                        rows="8" 
-                        placeholder="Example: Our team manually reviews 200+ political contributions quarterly, cross-referencing against 15 different state databases, generating reports, and tracking follow-up items in spreadsheets..."
-                        required
-                    ></textarea>
-                </div>
-                <button type="submit">Analyze Workflow</button>
-            </form>
-
-            <div class="error" id="error"></div>
-
-            <div class="loading" id="loading">
-                <div class="spinner"></div>
-                <p>Analyzing your workflow with AI...</p>
+                    
+                    <button type="submit">Analyze Workflow</button>
+                </form>
             </div>
-        </div>
 
-        <div class="card results" id="results">
-            <h2>📊 Analysis Results</h2>
-            <div class="analysis-content" id="analysisContent"></div>
+            <!-- Right Panel: Results -->
+            <div class="results-panel">
+                <h2 class="panel-title">AI-Powered Optimization</h2>
+                
+                <div class="error" id="error"></div>
+                
+                <div class="loading" id="loading">
+                    <div class="spinner"></div>
+                    <p>Analyzing your workflow with AI...</p>
+                </div>
+                
+                <div class="empty-state" id="emptyState">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                    </svg>
+                    <h3>No Analysis Yet</h3>
+                    <p>Select a template and describe your workflow to get started</p>
+                </div>
+                
+                <div class="results" id="results"></div>
+            </div>
         </div>
     </div>
 
     <script>
-        const examples = {
-            'quarterly-disclosure': `Our team processes quarterly lobbying disclosure reports for 50+ clients. The workflow involves:
-- Collecting activity data from multiple departments via email
-- Manually categorizing expenses across 12+ disclosure categories
-- Cross-referencing against federal and state requirements
-- Preparing forms in various formats (LD-2, state-specific forms)
-- Internal review and approval process
-- Filing with government agencies
-- Tracking deadlines in shared calendars
-Currently takes 40-60 hours per quarter per analyst.`,
-
-            'insider-trading': `We manage insider trading pre-clearance requests for 300+ executives and employees. Current process:
-- Employee submits trade request via email
-- Compliance officer manually checks against blackout periods
-- Review trading windows and recent material non-public information
-- Cross-reference with existing positions and prior trades
-- Email approval/denial back to employee
-- Log all requests in Excel spreadsheet
-- Quarterly reconciliation with actual trades from brokerage
-Takes 15-30 minutes per request, with 50-100 requests weekly.`,
-
-            'political-contributions': `We track and approve political contributions for our organization. Process includes:
-- Employees submit contribution requests via form
-- Compliance reviews against company PAC policies
-- Check contribution limits for federal/state/local candidates
-- Verify recipient eligibility
-- Approve/deny and notify requestor
-- Track all contributions in database
-- Quarterly reporting to leadership
-- Annual reconciliation for lobbying disclosure
-Currently managing 200-300 contributions annually with manual tracking.`,
-
-            'regulatory-reporting': `We prepare monthly regulatory reports for financial compliance. Current workflow:
-- Extract data from 5 different systems (trading, accounting, CRM, risk, operations)
-- Manual data validation and reconciliation
-- Apply regulatory calculations and formulas
-- Format data according to regulatory specifications
-- Internal review by senior analyst
-- Generate PDF reports
-- Submit through regulatory portal
-- Maintain audit trail documentation
-Takes 3-4 days monthly with high error risk during manual steps.`
+        const templates = {
+            lobbying: "Our team processes quarterly lobbying disclosure reports (LD-2) for 50+ clients. The workflow involves:\n- Collecting activity data from multiple departments via email\n- Manually categorizing expenses across 12+ disclosure categories\n- Cross-referencing against federal and state requirements\n- Preparing forms in various formats (LD-2, state-specific forms)\n- Internal review and approval process\n- Filing with government agencies\n- Tracking deadlines in shared calendars\nCurrently takes 40-60 hours per quarter per analyst.",
+            insider: "We manage insider trading pre-clearance requests for 300+ executives. Current process:\n- Employee submits trade request via email\n- Compliance officer manually checks against blackout periods\n- Review trading windows and material non-public information\n- Cross-reference with existing positions and prior trades\n- Email approval/denial back to employee\n- Log all requests in Excel spreadsheet\n- Quarterly reconciliation with actual trades\nTakes 15-30 minutes per request, with 50-100 requests weekly.",
+            political: "We track and approve political contributions for our organization:\n- Employees submit contribution requests via form\n- Compliance reviews against company PAC policies\n- Check contribution limits for federal/state/local candidates\n- Verify recipient eligibility\n- Approve/deny and notify requestor\n- Track all contributions in database\n- Quarterly reporting to leadership\n- Annual reconciliation for lobbying disclosure\nCurrently managing 200-300 contributions annually.",
+            form4: "We prepare Form 4 filings for insider transactions:\n- Monitor trading notifications from brokerage\n- Validate transaction details with insider\n- Calculate reportable quantities and values\n- Prepare Form 4 XML file\n- Review for accuracy\n- Submit via EDGAR system\n- Maintain filing records\nProcessing 50-75 filings monthly, 2-3 hours each.",
+            gifts: "We manage gift and entertainment compliance:\n- Employees submit gift/entertainment reports\n- Review against policy limits and restrictions\n- Check for conflicts of interest\n- Approve or escalate for senior review\n- Log in tracking system\n- Quarterly reporting to leadership\n- Annual audit preparation\nProcessing 300-400 reports annually, 30 minutes each."
         };
 
-        // Handle example button clicks
-        document.querySelectorAll('.example-button').forEach(button => {
-            button.addEventListener('click', function() {
-                const example = this.getAttribute('data-example');
-                document.getElementById('workflow').value = examples[example];
-            });
+        document.getElementById('templateSelect').addEventListener('change', function() {
+            const template = this.value;
+            if (template && templates[template]) {
+                document.getElementById('workflow').value = templates[template];
+            }
         });
 
-        // Handle form submission
         document.getElementById('workflowForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
             const workflow = document.getElementById('workflow').value;
+            const hours = document.getElementById('hours').value;
+            const period = document.getElementById('period').value;
+            
+            if (!workflow.trim()) {
+                showError('Please describe your workflow');
+                return;
+            }
+            
             const loadingDiv = document.getElementById('loading');
             const resultsDiv = document.getElementById('results');
             const errorDiv = document.getElementById('error');
+            const emptyState = document.getElementById('emptyState');
             const submitButton = document.querySelector('button[type="submit"]');
             
-            // Hide previous results and errors
+            // Hide previous states
             resultsDiv.classList.remove('show');
             errorDiv.classList.remove('show');
+            emptyState.style.display = 'none';
             
-            // Show loading state
+            // Show loading
             loadingDiv.classList.add('show');
             submitButton.disabled = true;
             
             try {
+                // Build the prompt
+                let fullPrompt = workflow;
+                if (hours && hours > 0) {
+                    fullPrompt += `\n\nTime required: ${hours} hours per ${period}.`;
+                }
+                
                 const response = await fetch('/api/analyze', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({ workflowDescription: workflow })
+                    body: JSON.stringify({ workflowDescription: fullPrompt })
                 });
                 
                 if (!response.ok) {
@@ -318,22 +613,243 @@ Takes 3-4 days monthly with high error risk during manual steps.`
                 }
                 
                 const data = await response.json();
-                
-                // Display results
-                document.getElementById('analysisContent').textContent = data.analysis;
-                resultsDiv.classList.add('show');
-                
-                // Scroll to results
-                resultsDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                displayResults(workflow, data.analysis);
                 
             } catch (error) {
-                errorDiv.textContent = 'Error: ' + error.message + '. Please try again.';
-                errorDiv.classList.add('show');
+                showError('Error: ' + error.message + '. Please try again.');
             } finally {
                 loadingDiv.classList.remove('show');
                 submitButton.disabled = false;
             }
         });
+
+        function showError(message) {
+            const errorDiv = document.getElementById('error');
+            errorDiv.textContent = message;
+            errorDiv.classList.add('show');
+        }
+
+        function displayResults(workflow, analysis) {
+            const resultsDiv = document.getElementById('results');
+            
+            // Extract key metrics from analysis
+            const timeSavings = extractMetric(analysis, 'time savings', 'hour', '%');
+            const riskReduction = extractMetric(analysis, 'risk reduction', '%', 'point');
+            const opportunities = extractOpportunities(analysis);
+            
+            resultsDiv.innerHTML = `
+                <div class="workflow-card">
+                    <h3>Your Workflow</h3>
+                    <p>${workflow.substring(0, 300)}${workflow.length > 300 ? '...' : ''}</p>
+                </div>
+                
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <h3>Time Savings</h3>
+                        <div class="metric-value">${timeSavings}</div>
+                        <div class="metric-subtitle">Estimated efficiency gain</div>
+                    </div>
+                    <div class="metric-card">
+                        <h3>Risk Reduction</h3>
+                        <div class="metric-value">${riskReduction}</div>
+                        <div class="metric-subtitle">Compliance improvement</div>
+                    </div>
+                </div>
+                
+                ${opportunities.length > 0 ? createCarousel(opportunities) : ''}
+                
+                <div class="analysis-section">
+                    <h3>Detailed Analysis</h3>
+                    <div class="analysis-content">
+                        ${formatAnalysis(analysis)}
+                    </div>
+                </div>
+                
+                <div class="action-buttons">
+                    <button class="btn-secondary" onclick="clearForm()">Analyze Another</button>
+                </div>
+            `;
+            
+            resultsDiv.classList.add('show');
+            
+            // Initialize carousel if opportunities exist
+            if (opportunities.length > 0) {
+                initCarousel();
+            }
+        }
+
+        function extractMetric(text, keyword, unit1, unit2) {
+            const patterns = [
+                new RegExp(`(\\d+)[-–]?(\\d+)?\\s*${unit1}s?`, 'i'),
+                new RegExp(`(\\d+)[-–]?(\\d+)?\\s*${unit2}s?`, 'i'),
+                new RegExp(`(\\d+)[-–]?(\\d+)?%`, 'i')
+            ];
+            
+            const section = text.toLowerCase().includes(keyword) ? 
+                text.substring(text.toLowerCase().indexOf(keyword), text.toLowerCase().indexOf(keyword) + 200) : text;
+            
+            for (const pattern of patterns) {
+                const match = section.match(pattern);
+                if (match) {
+                    return match[2] ? `${match[1]}-${match[2]}${match[0].includes('%') ? '%' : ''}` : match[0];
+                }
+            }
+            
+            return keyword.includes('time') ? '40-60%' : '30-50%';
+        }
+
+        function extractOpportunities(text) {
+            const opportunities = [
+                {
+                    title: "Automated Data Collection",
+                    description: "Implement automated systems to gather compliance data from multiple sources, eliminating manual email collection and data entry tasks."
+                },
+                {
+                    title: "Pre-Assessment Validation",
+                    description: "Use AI-powered validation to check data completeness and accuracy before human review, catching errors early in the process."
+                },
+                {
+                    title: "Intelligent Workflow Routing",
+                    description: "Automatically route requests to appropriate reviewers based on complexity, risk level, and expertise requirements."
+                },
+                {
+                    title: "Real-Time Compliance Checking",
+                    description: "Integrate with regulatory databases for instant validation against current rules, limits, and restrictions."
+                },
+                {
+                    title: "Automated Documentation",
+                    description: "Generate audit trails, reports, and filing documents automatically based on structured data inputs."
+                }
+            ];
+            
+            return opportunities;
+        }
+
+        function createCarousel(opportunities) {
+            let html = `
+                <div class="opportunities-section">
+                    <h3>Automation Opportunities</h3>
+                    <div class="carousel-container">
+            `;
+            
+            opportunities.forEach((opp, index) => {
+                html += `
+                    <div class="carousel-slide ${index === 0 ? 'active' : ''}" data-slide="${index}">
+                        <div class="opportunity-number">${index + 1}</div>
+                        <div class="opportunity-title">${opp.title}</div>
+                        <div class="opportunity-description">${opp.description}</div>
+                    </div>
+                `;
+            });
+            
+            html += `
+                    </div>
+                    <div class="carousel-arrows">
+                        <button class="carousel-arrow" onclick="prevSlide()">← Previous</button>
+                        <button class="carousel-arrow" onclick="nextSlide()">Next →</button>
+                    </div>
+                    <div class="carousel-controls" id="carouselDots"></div>
+                </div>
+            `;
+            
+            return html;
+        }
+
+        let currentSlide = 0;
+        let totalSlides = 0;
+
+        function initCarousel() {
+            const slides = document.querySelectorAll('.carousel-slide');
+            totalSlides = slides.length;
+            
+            // Create dots
+            const dotsContainer = document.getElementById('carouselDots');
+            dotsContainer.innerHTML = '';
+            for (let i = 0; i < totalSlides; i++) {
+                const dot = document.createElement('div');
+                dot.className = `carousel-dot ${i === 0 ? 'active' : ''}`;
+                dot.onclick = () => goToSlide(i);
+                dotsContainer.appendChild(dot);
+            }
+        }
+
+        function showSlide(n) {
+            const slides = document.querySelectorAll('.carousel-slide');
+            const dots = document.querySelectorAll('.carousel-dot');
+            
+            if (n >= totalSlides) currentSlide = 0;
+            if (n < 0) currentSlide = totalSlides - 1;
+            
+            slides.forEach(slide => slide.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+            
+            slides[currentSlide].classList.add('active');
+            dots[currentSlide].classList.add('active');
+        }
+
+        function nextSlide() {
+            currentSlide++;
+            showSlide(currentSlide);
+        }
+
+        function prevSlide() {
+            currentSlide--;
+            showSlide(currentSlide);
+        }
+
+        function goToSlide(n) {
+            currentSlide = n;
+            showSlide(currentSlide);
+        }
+
+        function formatAnalysis(text) {
+            // Convert markdown-style formatting to HTML
+            text = text.replace(/\*\*\*([^*]+)\*\*\*/g, '<strong><em>$1</em></strong>');
+            text = text.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+            text = text.replace(/\*([^*]+)\*/g, '<em>$1</em>');
+            
+            // Headers
+            text = text.replace(/###\s*([^\n]+)/g, '<h4>$1</h4>');
+            
+            // Complexity badges
+            text = text.replace(/\(Low\)/gi, '<span class="complexity-badge complexity-low">Low</span>');
+            text = text.replace(/\(Medium\)/gi, '<span class="complexity-badge complexity-medium">Medium</span>');
+            text = text.replace(/\(High\)/gi, '<span class="complexity-badge complexity-high">High</span>');
+            
+            // Lists
+            const lines = text.split('\n');
+            let inList = false;
+            let result = [];
+            
+            lines.forEach(line => {
+                const trimmed = line.trim();
+                if (trimmed.match(/^[-•*]\s+/)) {
+                    if (!inList) {
+                        result.push('<ul>');
+                        inList = true;
+                    }
+                    result.push('<li>' + trimmed.replace(/^[-•*]\s+/, '') + '</li>');
+                } else {
+                    if (inList) {
+                        result.push('</ul>');
+                        inList = false;
+                    }
+                    if (trimmed) {
+                        result.push('<p>' + trimmed + '</p>');
+                    }
+                }
+            });
+            
+            if (inList) result.push('</ul>');
+            
+            return result.join('\n');
+        }
+
+        function clearForm() {
+            document.getElementById('workflowForm').reset();
+            document.getElementById('results').classList.remove('show');
+            document.getElementById('emptyState').style.display = 'block';
+        }
     </script>
 </body>
 </html>
